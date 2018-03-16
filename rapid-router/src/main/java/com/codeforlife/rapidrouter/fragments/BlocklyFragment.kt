@@ -1,4 +1,4 @@
-package com.codeforlife.rapidrouter
+package com.codeforlife.rapidrouter.fragments
 
 import com.google.blockly.android.AbstractBlocklyFragment
 import com.google.blockly.android.codegen.CodeGenerationRequest

@@ -1,4 +1,4 @@
-package com.codeforlife.rapidrouter
+package com.codeforlife.rapidrouter.gdx
 
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
