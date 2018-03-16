@@ -30,7 +30,6 @@ class GdxGameAdapter : ApplicationAdapter() {
         car = Sprite(img, blockSize, blockSize)
         grassBatch = SpriteBatch()
         grassImg = Texture("tiles/country/grass.png")
-
         levelMap = LevelReader.loadLevel(1)
 
     }
@@ -47,7 +46,7 @@ class GdxGameAdapter : ApplicationAdapter() {
     private fun drawCar() {
         batch.projectionMatrix = camera.combined
         batch.begin()
-        car.setPosition(levelMap.origin.coordinates[0].toFloat() * blockSize, levelMap.origin.coordinates[1].toFloat() * blockSize)
+        car.setPosition(levelMap.origin.coordinates.x.toFloat() * blockSize, levelMap.origin.coordinates.y.toFloat() * blockSize)
         car.rotation = (levelMap.origin.direction.rotation * 90).toFloat()
         car.draw(batch)
         batch.end()
