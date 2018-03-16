@@ -3,6 +3,10 @@
 /local.properties
 /.idea
 .DS_Store
-/build
+**/build
 /captures
 .externalNativeBuild
+.settings
+.project
+.classpath
+rapid-router/libs
