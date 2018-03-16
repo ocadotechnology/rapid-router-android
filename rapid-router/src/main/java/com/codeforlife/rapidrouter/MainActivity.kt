@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
         supportActionBar?.elevation = 0.0f
 
-        val loadLevel = LevelReader.loadLevel(21, assets)
     }
 }
 
