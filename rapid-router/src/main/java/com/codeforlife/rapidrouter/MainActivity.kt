@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.codeforlife.rapidrouter.fragments.BlocklyFragment
 import com.codeforlife.rapidrouter.fragments.GameFragment
-import com.codeforlife.rapidrouter.utils.LevelReader
 
 
 class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
