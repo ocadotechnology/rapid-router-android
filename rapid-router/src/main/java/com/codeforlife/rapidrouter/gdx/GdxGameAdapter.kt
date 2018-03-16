@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.codeforlife.rapidrouter.models.LevelMap
 import com.codeforlife.rapidrouter.utils.LevelReader
+import com.codeforlife.rapidrouter.utils.RoadBuilder
 
 
 class GdxGameAdapter : ApplicationAdapter() {
@@ -39,6 +40,7 @@ class GdxGameAdapter : ApplicationAdapter() {
         grassImg = Texture("tiles/country/grass.png")
 
         levelMap = LevelReader.loadLevel(1)
+        RoadBuilder.build(levelMap.paths)
 
         endBatch = SpriteBatch()
         endImg = Texture("tiles/road/dead_end.png")
