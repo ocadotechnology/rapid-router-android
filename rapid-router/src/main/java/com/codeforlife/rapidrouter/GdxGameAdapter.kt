@@ -27,5 +27,4 @@ class GdxGameAdapter : ApplicationAdapter() {
         batch.dispose()
         img.dispose()
     }
-
 }
