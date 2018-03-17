@@ -14,7 +14,6 @@ import com.codeforlife.rapidrouter.fragments.GameFragment
 class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
     override fun exit() {
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +24,6 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
         pager.adapter = MainViewPagerAdapter(supportFragmentManager)
 
         supportActionBar?.elevation = 0.0f
-
     }
 }
 

@@ -4,9 +4,13 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
 
-    configurations { natives }
+    configurations {
+        natives
+        ktlint
+    }
 
     compileSdkVersion 27
+    buildToolsVersion "27.0.3"
     defaultConfig {
         applicationId "com.codeforlife.rapidrouter"
         minSdkVersion 21
@@ -32,6 +36,8 @@ android {
 }
 
 dependencies {
+    ktlint "com.github.shyiko:ktlint:0.19.0"
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
@@ -64,6 +70,21 @@ repositories {
     mavenCentral()
 }
 
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    main = "com.github.shyiko.ktlint.Main"
+    classpath = configurations.ktlint
+    args "src/**/*.kt"
+}
+
+check.dependsOn ktlint
+
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    main = "com.github.shyiko.ktlint.Main"
+    classpath = configurations.ktlint
+    args "-F", "src/**/*.kt"
+}
 
 task copyAndroidNatives() {
     file("libs/armeabi/").mkdirs();
