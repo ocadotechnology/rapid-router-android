@@ -8,8 +8,7 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.codeforlife.rapidrouter.models.LevelMap
-import com.codeforlife.rapidrouter.utils.LevelReader
-import com.codeforlife.rapidrouter.utils.RoadBuilder
+import com.codeforlife.rapidrouter.utils.*
 
 
 class GdxGameAdapter : ApplicationAdapter() {
@@ -23,10 +22,14 @@ class GdxGameAdapter : ApplicationAdapter() {
     private lateinit var endSprite: Sprite
     private lateinit var endImg: Texture
 
+    private lateinit var straightImg: Texture
+    private lateinit var straightSprite: Sprite
+
     lateinit var car: Sprite
 
     private lateinit var levelMap: LevelMap
     private val blockSize = 128
+    lateinit var road: List<RoadBlock>
 
     override fun create() {
         camera = OrthographicCamera()
@@ -40,11 +43,14 @@ class GdxGameAdapter : ApplicationAdapter() {
         grassImg = Texture("tiles/country/grass.png")
 
         levelMap = LevelReader.loadLevel(1)
-        RoadBuilder.build(levelMap.paths)
+        road = RoadBuilder.build(levelMap.paths, levelMap.startingPoint(), levelMap.endingPoint)
 
         endBatch = SpriteBatch()
         endImg = Texture("tiles/road/dead_end.png")
         endSprite = Sprite(endImg, blockSize, blockSize)
+
+        straightImg = Texture("tiles/road/straight.png")
+        straightSprite = Sprite(straightImg, blockSize, blockSize)
 
     }
 
@@ -55,14 +61,43 @@ class GdxGameAdapter : ApplicationAdapter() {
 
         drawGrass()
 
-        endBatch.projectionMatrix = camera.combined
-        endBatch.begin()
-        endSprite.setPosition(levelMap.origin.coordinates.x.toFloat() * blockSize, levelMap.origin.coordinates.y.toFloat() * blockSize)
-        endSprite.rotation = 90f
-        endSprite.draw(endBatch)
-        endBatch.end()
+        drawRoad()
 
         drawCar()
+    }
+
+    private fun drawRoad() {
+        endBatch.projectionMatrix = camera.combined
+
+        road.forEach {
+            when (it) {
+                is Start ->
+                {
+                    endBatch.begin()
+                    endSprite.setPosition(levelMap.startingPoint().x.toFloat() * blockSize, levelMap.startingPoint().y.toFloat() * blockSize)
+                    endSprite.rotation = 90f
+                    endSprite.draw(endBatch)
+                    endBatch.end()
+                }
+                is Finish ->
+                {
+                    endBatch.begin()
+                    endSprite.setPosition(levelMap.endingPoint.x.toFloat() * blockSize, levelMap.endingPoint.y.toFloat() * blockSize)
+                    endSprite.rotation = 270f
+                    endSprite.draw(endBatch)
+                    endBatch.end()
+                }
+                is Straight ->
+                {
+                    endBatch.begin()
+                    straightSprite.setPosition(it.point.x.toFloat() * blockSize, it.point.y.toFloat() * blockSize)
+                    straightSprite.rotation = 90f
+                    straightSprite.draw(endBatch)
+                    endBatch.end()
+                }
+            }
+        }
+
     }
 
     private fun drawCar() {

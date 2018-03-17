@@ -5,6 +5,7 @@ import com.codeforlife.rapidrouter.models.*
 import com.github.salomonbrys.kotson.fromJson
 import com.github.salomonbrys.kotson.get
 import com.google.gson.Gson
+import com.google.gson.JsonArray
 import com.google.gson.JsonParser
 
 
@@ -26,6 +27,8 @@ object LevelReader {
                     gson.fromJson(jsonElement["connectedNodes"]))
         }
 
+        val endingPoint: JsonArray = jsonObject.get("destinations").asJsonArray
+
         return LevelMap(
                 Origin(
                         Direction.valueOf(origin["direction"].asString),
@@ -34,7 +37,9 @@ object LevelReader {
                                 origin["coordinate"].asJsonArray[1].asInt
                         )
                 ),
-                paths = paths
+                paths = paths,
+                endingPoint = Point(endingPoint[0][0].asInt, endingPoint[0][1].asInt)
+
         )
     }
 }

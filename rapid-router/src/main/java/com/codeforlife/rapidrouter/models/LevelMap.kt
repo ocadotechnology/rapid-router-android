@@ -3,12 +3,10 @@ package com.codeforlife.rapidrouter.models
 import com.google.gson.annotations.SerializedName
 
 data class LevelMap(@SerializedName("origin") val origin: Origin,
-                    @SerializedName("path") val paths: List<PathElement>) {
+                    @SerializedName("path") val paths: List<PathElement>,
+                    val endingPoint: Point) {
 
-    fun startingPoint(): Point = paths.first().coordinates
-
-    fun finishingPoint(): Point = paths.last().coordinates
-
+    fun startingPoint(): Point = origin.coordinates
 }
 
 
