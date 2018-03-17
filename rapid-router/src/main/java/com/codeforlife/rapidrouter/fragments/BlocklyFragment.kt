@@ -4,7 +4,6 @@ import com.google.blockly.android.AbstractBlocklyFragment
 import com.google.blockly.android.codegen.CodeGenerationRequest
 import com.google.blockly.android.codegen.LoggingCodeGeneratorCallback
 import com.google.blockly.model.DefaultBlocks
-import java.util.*
 import java.util.Collections.emptyList
 
 class BlocklyFragment : AbstractBlocklyFragment() {
@@ -28,5 +27,4 @@ class BlocklyFragment : AbstractBlocklyFragment() {
     override fun getCodeGenerationCallback(): CodeGenerationRequest.CodeGeneratorCallback {
         return generatorCallback
     }
-
 }

@@ -10,11 +10,9 @@ import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.codeforlife.rapidrouter.fragments.BlocklyFragment
 import com.codeforlife.rapidrouter.fragments.GameFragment
 
-
 class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
     override fun exit() {
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +23,6 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
         pager.adapter = MainViewPagerAdapter(supportFragmentManager)
 
         supportActionBar?.elevation = 0.0f
-
     }
 }
 
@@ -40,5 +37,4 @@ class MainViewPagerAdapter(manager: FragmentManager) : FragmentStatePagerAdapter
     override fun getCount() = 2
 
     override fun getPageTitle(position: Int) = if (position == 0) "Blockly Stage" else "Game View"
-
 }

@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.codeforlife.rapidrouter.models.LevelMap
-import com.codeforlife.rapidrouter.utils.*
-
+import com.codeforlife.rapidrouter.utils.LevelReader
+import com.codeforlife.rapidrouter.utils.RoadBuilder
 
 class GdxGameAdapter : ApplicationAdapter() {
     private lateinit var batch: SpriteBatch
@@ -127,5 +127,4 @@ class GdxGameAdapter : ApplicationAdapter() {
         batch.dispose()
         img.dispose()
     }
-
 }
