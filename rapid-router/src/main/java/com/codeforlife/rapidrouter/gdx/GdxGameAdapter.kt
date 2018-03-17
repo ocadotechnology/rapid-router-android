@@ -11,7 +11,6 @@ import com.codeforlife.rapidrouter.models.LevelMap
 import com.codeforlife.rapidrouter.utils.LevelReader
 import com.codeforlife.rapidrouter.utils.RoadBuilder
 
-
 class GdxGameAdapter : ApplicationAdapter() {
     private lateinit var batch: SpriteBatch
     private lateinit var img: Texture
@@ -45,7 +44,6 @@ class GdxGameAdapter : ApplicationAdapter() {
         endBatch = SpriteBatch()
         endImg = Texture("tiles/road/dead_end.png")
         endSprite = Sprite(endImg, blockSize, blockSize)
-
     }
 
     override fun render() {
@@ -92,5 +90,4 @@ class GdxGameAdapter : ApplicationAdapter() {
         batch.dispose()
         img.dispose()
     }
-
 }
