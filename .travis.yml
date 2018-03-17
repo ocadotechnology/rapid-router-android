@@ -1,14 +1,15 @@
 language: android
 android:
-	components:
-		- tools
-		- platform-tools
-		- tools
+  components:
+    - tools
+    - platform-tools
+    - tools
 
-		- build-tools-27.0.3
-		- android-27
-		- extra-google-m2repository
-		- extra-android-m2repository
+    - build-tools-27.0.3
+    - android-27
+    - extra-google-m2repository
+    - extra-android-m2repository
+    
 script:
-	- gradle ktlint
-	- gradle build
+  - gradle ktlint
+  - gradle build
