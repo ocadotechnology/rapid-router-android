@@ -2,7 +2,7 @@ First things first, thank you for taking the time to look into this project and 
 
 To get started with the project, please [check out our README](https://github.com/ocadotechnology/rapid-router-android#getting-started) which gives a brief guide on cloning the codebase and setting up your Android Studio IDE. Once you're done there, you're ready to start developing!
 
-We welcome all new ideas and approaches, however we do ask that you read the rest of this page to get familiar with our process.
+We welcome all new ideas and approaches, however we do ask that you read the rest of this page to get familiar with our process and, as an open source community, to adhere to our [code of conduct](https://github.com/ocadotechnology/rapid-router-android/blob/master/CODE_OF_CONDUCT.md).
 
 ## Branching
 Rather than push feature changes to master, we use branch development. In order to submit a change, please first checkout a new branch and commit your changes there.
