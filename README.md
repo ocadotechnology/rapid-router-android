@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ocadotechnology/rapid-router-android.svg?branch=master)](https://travis-ci.org/ocadotechnology/rapid-router-android)
+
 # Welcome to Rapid Router for Android
 [Rapid Router](https://www.codeforlife.education/rapidrouter/) is an online game aimed at all ages with the primary goal of introducing coding concepts to children at earlier stages in their education. As the world of technology has continued to grow and flourish, this new age demands that we evolve with it, and so comes the demand for applications. We want to give people the opportunity to work with Rapid Router anywhere, on the move, and eventually even offline.
 
@@ -9,7 +11,10 @@ To get involved with this project, the first step is to clone via HTTPS or SSH. 
 
 Next add an AVD, like the Pixel C, and ensure it has the Oreo software version. `Ctrl+Shift+A` for Windows or `⌘+Shift+A` on a Mac and type `AVD`. Select the AVD Manager. Click the button to create a virtual device and search for Pixel devices. Select the Pixel C and click `Next`. Download the Oreo system image and select it before clicking `Next` again. Finalise the installation of the AVD.
 
-Now you can run the app on this emulator device. Note that it won't be possible to run the AVD on certain machines, depending on the CPU specifications. If this is the case you must use a physical device for testing.
+Now you can run the app on this emulator device. It won't be possible to run the AVD quite as simply on certain machines, depending on the CPU specifications. If you have AMD rather than Intel drivers then you should try downloading Nougat `arm64-v8a` 7.1.1 system image under "Other Images" in the AVD virtual device configuration screen. You may also be prompted on first run to the install further APIs for full compatibility, and it should be noted that it will run a lot slower than when using a computer with the correct Intel support. If this doesn't work, or the slowness is an issue, then please use a physical device for testing.
+
+## Contributing
+If you've set everything up and you would like to help us out, then please feel free! We would love to have new people on board. For more information on how you can contribute, check out [our handy guide](https://github.com/ocadotechnology/rapid-router-android/blob/master/Contributing.md).
 
 ## Where Can I Get Help?
 The main contributors to this repository are our Android volunteers, and they are all happy to answer any questions you have. Please feel free to contact any of them and they will do their best to help. Alternatively, if you'd like to contact the Code for Life organisation directly then please don't hesitate to contact us directly using this [contact form](https://www.codeforlife.education/help/#contact) and we'll get in touch as soon as possible!
