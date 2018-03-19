@@ -17,3 +17,8 @@ To have your changes merged into master, you must next open a pull request. Give
 Our builds are run on [Travis](https://travis-ci.org/ocadotechnology/rapid-router-android), with the current status displayed here and on the README.
 
 [![Build Status](https://travis-ci.org/ocadotechnology/rapid-router-android.svg?branch=master)](https://travis-ci.org/ocadotechnology/rapid-router-android)
+
+The script for running this build can be found [here](https://github.com/ocadotechnology/rapid-router-android/blob/master/.travis.yml).
+
+## Final Words
+Thank you again for deciding to contribute! If you need any help or have any questions then please don't hesitate to contact one of the team.
