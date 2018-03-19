@@ -16,12 +16,30 @@ object RoadBuilder {
                 road.add(Finish(it.coordinates))
             }
             if (it.connectedNodes.size == 2) {
-                road.add(Straight(it.coordinates))
+                val isTurn = isTurn(it.connectedNodes, paths)
+                if (isTurn) {
+                    road.add(Turn(it.coordinates))
+                } else {
+                    road.add(Straight(it.coordinates))
+                }
+            }
+            if (it.connectedNodes.size == 3) {
+                road.add(Junction(it.coordinates))
+            }
+            if (it.connectedNodes.size == 4) {
+                road.add(Crossroad(it.coordinates))
             }
 
         }
 
         return road
+    }
+
+    private fun isTurn(connectedNodes: List<Int>, paths: List<PathElement>): Boolean {
+        val previousPath = paths[connectedNodes[0]].coordinates
+        val nextPath = paths[connectedNodes[1]].coordinates
+
+        return !(previousPath.x == nextPath.x || previousPath.y == nextPath.y)
     }
 
 }
@@ -31,3 +49,5 @@ data class Start(val point: Point) : RoadBlock()
 data class Finish(val point: Point) : RoadBlock()
 data class Turn(val point: Point) : RoadBlock()
 data class Straight(val point: Point) : RoadBlock()
+data class Junction(val point: Point) : RoadBlock()
+data class Crossroad(val point: Point) : RoadBlock()

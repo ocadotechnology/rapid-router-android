@@ -8,8 +8,7 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.codeforlife.rapidrouter.models.LevelMap
-import com.codeforlife.rapidrouter.utils.LevelReader
-import com.codeforlife.rapidrouter.utils.RoadBuilder
+import com.codeforlife.rapidrouter.utils.*
 
 class GdxGameAdapter : ApplicationAdapter() {
     private lateinit var batch: SpriteBatch
@@ -24,6 +23,15 @@ class GdxGameAdapter : ApplicationAdapter() {
 
     private lateinit var straightImg: Texture
     private lateinit var straightSprite: Sprite
+
+    private lateinit var turnImg: Texture
+    private lateinit var turnSprite: Sprite
+
+    private lateinit var junctionImg: Texture
+    private lateinit var junctionSprite: Sprite
+
+    private lateinit var crossroadImg: Texture
+    private lateinit var crossroadSprite: Sprite
 
     lateinit var car: Sprite
 
@@ -42,7 +50,7 @@ class GdxGameAdapter : ApplicationAdapter() {
         grassBatch = SpriteBatch()
         grassImg = Texture("tiles/country/grass.png")
 
-        levelMap = LevelReader.loadLevel(1)
+        levelMap = LevelReader.loadLevel(18)
         road = RoadBuilder.build(levelMap.paths, levelMap.startingPoint(), levelMap.endingPoint)
 
         endBatch = SpriteBatch()
@@ -51,6 +59,15 @@ class GdxGameAdapter : ApplicationAdapter() {
 
         straightImg = Texture("tiles/road/straight.png")
         straightSprite = Sprite(straightImg, blockSize, blockSize)
+
+        turnImg = Texture("tiles/road/turn.png")
+        turnSprite = Sprite(turnImg, blockSize, blockSize)
+
+        junctionImg = Texture("tiles/road/t_junction.png")
+        junctionSprite = Sprite(junctionImg, blockSize, blockSize)
+
+        crossroadImg = Texture("tiles/road/crossroads.png")
+        crossroadSprite = Sprite(crossroadImg, blockSize, blockSize)
 
     }
 
@@ -93,6 +110,30 @@ class GdxGameAdapter : ApplicationAdapter() {
                     straightSprite.setPosition(it.point.x.toFloat() * blockSize, it.point.y.toFloat() * blockSize)
                     straightSprite.rotation = 90f
                     straightSprite.draw(endBatch)
+                    endBatch.end()
+                }
+                is Turn ->
+                {
+                    endBatch.begin()
+                    turnSprite.setPosition(it.point.x.toFloat() * blockSize, it.point.y.toFloat() * blockSize)
+                    turnSprite.rotation = 90f
+                    turnSprite.draw(endBatch)
+                    endBatch.end()
+                }
+                is Junction ->
+                {
+                    endBatch.begin()
+                    junctionSprite.setPosition(it.point.x.toFloat() * blockSize, it.point.y.toFloat() * blockSize)
+                    junctionSprite.rotation = 90f
+                    junctionSprite.draw(endBatch)
+                    endBatch.end()
+                }
+                is Crossroad ->
+                {
+                    endBatch.begin()
+                    crossroadSprite.setPosition(it.point.x.toFloat() * blockSize, it.point.y.toFloat() * blockSize)
+                    crossroadSprite.rotation = 90f
+                    crossroadSprite.draw(endBatch)
                     endBatch.end()
                 }
             }
