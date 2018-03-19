@@ -54,7 +54,7 @@ class GdxGameAdapter : ApplicationAdapter() {
         grassBatch = SpriteBatch()
         grassImg = Texture("tiles/country/grass.png")
 
-        levelMap = LevelReader.loadLevel(8)
+        levelMap = LevelReader.loadLevel(18)
         road = RoadBuilder.build(levelMap.paths, levelMap.startingPoint(), levelMap.endingPoint)
 
         endBatch = SpriteBatch()
@@ -95,21 +95,21 @@ class GdxGameAdapter : ApplicationAdapter() {
                 is Start -> {
                     endBatch.begin()
                     endSprite.setPosition(levelMap.startingPoint().x.toFloat() * blockSize, levelMap.startingPoint().y.toFloat() * blockSize)
-                    endSprite.rotation = 90f
+                    endSprite.rotation = it.rotation * 90f
                     endSprite.draw(endBatch)
                     endBatch.end()
                 }
                 is Finish -> {
                     endBatch.begin()
                     endSprite.setPosition(levelMap.endingPoint.x.toFloat() * blockSize, levelMap.endingPoint.y.toFloat() * blockSize)
-                    endSprite.rotation = 270f
+                    endSprite.rotation = it.rotation * 90f
                     endSprite.draw(endBatch)
                     endBatch.end()
                 }
                 is Straight -> {
                     endBatch.begin()
                     straightSprite.setPosition(it.point.x.toFloat() * blockSize, it.point.y.toFloat() * blockSize)
-                    straightSprite.rotation = 90f
+                    straightSprite.rotation = it.rotation * 90f
                     straightSprite.draw(endBatch)
                     endBatch.end()
                 }

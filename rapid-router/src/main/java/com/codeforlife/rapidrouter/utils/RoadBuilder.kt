@@ -10,18 +10,21 @@ object RoadBuilder {
 
         paths.forEach {
             if (it.coordinates == startingPoint) {
-                road.add(Start(it.coordinates))
+                val rotation = calculateStartFinish(it.coordinates, it.connectedNodes, paths)
+                road.add(Start(it.coordinates, rotation))
             }
             if (it.coordinates == endingPoint) {
-                road.add(Finish(it.coordinates))
+                val rotation = calculateStartFinish(it.coordinates, it.connectedNodes, paths)
+                road.add(Finish(it.coordinates, rotation))
             }
             if (it.connectedNodes.size == 2) {
                 val isTurn = isTurn(it.connectedNodes, paths)
-                val rotation = calculateRotation(it.coordinates, it.connectedNodes, paths)
                 if (isTurn) {
+                    val rotation = calculateTurnRotation(it.coordinates, it.connectedNodes, paths)
                     road.add(Turn(it.coordinates, rotation))
                 } else {
-                    road.add(Straight(it.coordinates))
+                    val rotation = calculateStraightRotation(it.coordinates, it.connectedNodes, paths)
+                    road.add(Straight(it.coordinates, rotation))
                 }
             }
             if (it.connectedNodes.size == 3) {
@@ -36,7 +39,27 @@ object RoadBuilder {
         return road
     }
 
-    private fun calculateRotation(currentElement: Point, connectedNodes: List<Int>, paths: List<PathElement>): Int {
+    private fun calculateStartFinish(currentElement: Point, connectedNodes: List<Int>, paths: List<PathElement>): Int {
+        val nextPath = paths[connectedNodes[0]].coordinates
+
+        return when {
+            currentElement.x == nextPath.x && currentElement.y > nextPath.y -> 4
+            currentElement.x == nextPath.x && currentElement.y < nextPath.y -> 2
+            currentElement.y == nextPath.y && currentElement.x < nextPath.x -> 3
+            else -> 1
+        }
+    }
+
+    private fun calculateStraightRotation(currentElement: Point, connectedNodes: List<Int>, paths: List<PathElement>): Int {
+        val nextPath = paths[connectedNodes[1]].coordinates
+
+        return when {
+            currentElement.x == nextPath.x -> 2
+            else -> 1
+        }
+    }
+
+    private fun calculateTurnRotation(currentElement: Point, connectedNodes: List<Int>, paths: List<PathElement>): Int {
         val previousPath = paths[connectedNodes[0]].coordinates
         val nextPath = paths[connectedNodes[1]].coordinates
 
@@ -73,9 +96,9 @@ object RoadBuilder {
 }
 
 sealed class RoadBlock
-data class Start(val point: Point) : RoadBlock()
-data class Finish(val point: Point) : RoadBlock()
+data class Start(val point: Point, val rotation: Int) : RoadBlock()
+data class Finish(val point: Point, val rotation: Int) : RoadBlock()
 data class Turn(val point: Point, val rotation: Int) : RoadBlock()
-data class Straight(val point: Point) : RoadBlock()
+data class Straight(val point: Point, val rotation: Int) : RoadBlock()
 data class Junction(val point: Point) : RoadBlock()
 data class Crossroad(val point: Point) : RoadBlock()
