@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ocadotechnology/rapid-router-android.svg?branch=master)](https://travis-ci.org/ocadotechnology/rapid-router-android)
+
 # Welcome to Rapid Router for Android
 [Rapid Router](https://www.codeforlife.education/rapidrouter/) is an online game aimed at all ages with the primary goal of introducing coding concepts to children at earlier stages in their education. As the world of technology has continued to grow and flourish, this new age demands that we evolve with it, and so comes the demand for applications. We want to give people the opportunity to work with Rapid Router anywhere, on the move, and eventually even offline.
 
