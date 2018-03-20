@@ -55,7 +55,7 @@ class GdxGameAdapter : ApplicationAdapter() {
         grassImg = Texture("tiles/country/grass.png")
 
         levelMap = LevelReader.loadLevel(18)
-        road = RoadBuilder.build(levelMap.paths, levelMap.startingPoint(), levelMap.endingPoint)
+        road = RoadBuilder.build(levelMap.paths, levelMap.startingPoint(), levelMap.endingPoints)
 
         endBatch = SpriteBatch()
         endImg = Texture("tiles/road/dead_end.png")
@@ -101,7 +101,7 @@ class GdxGameAdapter : ApplicationAdapter() {
                 }
                 is Finish -> {
                     endBatch.begin()
-                    endSprite.setPosition(levelMap.endingPoint.x.toFloat() * blockSize, levelMap.endingPoint.y.toFloat() * blockSize)
+                    endSprite.setPosition(it.point.x.toFloat() * blockSize, it.point.y.toFloat() * blockSize)
                     endSprite.rotation = it.rotation * 90f
                     endSprite.draw(endBatch)
                     endBatch.end()
@@ -131,7 +131,6 @@ class GdxGameAdapter : ApplicationAdapter() {
                 is Crossroad -> {
                     endBatch.begin()
                     crossroadSprite.setPosition(it.point.x.toFloat() * blockSize, it.point.y.toFloat() * blockSize)
-                    crossroadSprite.rotation = 90f
                     crossroadSprite.draw(endBatch)
                     endBatch.end()
                 }

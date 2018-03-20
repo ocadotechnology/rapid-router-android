@@ -4,7 +4,7 @@ import com.codeforlife.rapidrouter.models.PathElement
 import com.codeforlife.rapidrouter.models.Point
 
 object RoadBuilder {
-    fun build(paths: List<PathElement>, startingPoint: Point, endingPoint: Point): MutableList<RoadBlock> {
+    fun build(paths: List<PathElement>, startingPoint: Point, endingPoints: List<Point>): MutableList<RoadBlock> {
 
         val road = mutableListOf<RoadBlock>()
 
@@ -13,7 +13,7 @@ object RoadBuilder {
                 val rotation = calculateStartFinish(it.coordinates, it.connectedNodes, paths)
                 road.add(Start(it.coordinates, rotation))
             }
-            if (it.coordinates == endingPoint) {
+            if (it.coordinates != startingPoint && it.connectedNodes.size == 1) {
                 val rotation = calculateStartFinish(it.coordinates, it.connectedNodes, paths)
                 road.add(Finish(it.coordinates, rotation))
             }
@@ -98,8 +98,8 @@ object RoadBuilder {
         return when {
             currentElement.x == nextPath.x && currentElement.y > nextPath.y -> 4
             currentElement.x == nextPath.x && currentElement.y < nextPath.y -> 2
-            currentElement.y == nextPath.y && currentElement.x < nextPath.x -> 3
-            else -> 1
+            currentElement.y == nextPath.y && currentElement.x < nextPath.x -> 1
+            else -> 3
         }
     }
 

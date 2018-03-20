@@ -31,6 +31,8 @@ object LevelReader {
         }
 
         val endingPoint: JsonArray = jsonObject.get("destinations").asJsonArray
+        val endingPoints: List<Point> = endingPoint.map { jsonElement -> Point(jsonElement[0].asInt, jsonElement[1].asInt) }.toList()
+
 
         return LevelMap(
                 Origin(
@@ -41,7 +43,7 @@ object LevelReader {
                         )
                 ),
                 paths = paths,
-                endingPoint = Point(endingPoint[0][0].asInt, endingPoint[0][1].asInt)
+                endingPoints = endingPoints
 
         )
     }

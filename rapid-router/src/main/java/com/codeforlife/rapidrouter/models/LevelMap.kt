@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class LevelMap(@SerializedName("origin") val origin: Origin,
                     @SerializedName("path") val paths: List<PathElement>,
-                    val endingPoint: Point) {
+                    val endingPoints: List<Point>) {
 
     fun startingPoint(): Point = origin.coordinates
 }
