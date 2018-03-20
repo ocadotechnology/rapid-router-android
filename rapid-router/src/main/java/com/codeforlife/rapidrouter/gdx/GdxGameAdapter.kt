@@ -124,7 +124,7 @@ class GdxGameAdapter : ApplicationAdapter() {
                 is Junction -> {
                     endBatch.begin()
                     junctionSprite.setPosition(it.point.x.toFloat() * blockSize, it.point.y.toFloat() * blockSize)
-                    junctionSprite.rotation = 90f
+                    junctionSprite.rotation = it.rotation * 90f
                     junctionSprite.draw(endBatch)
                     endBatch.end()
                 }

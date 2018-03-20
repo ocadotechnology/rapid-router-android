@@ -28,7 +28,8 @@ object RoadBuilder {
                 }
             }
             if (it.connectedNodes.size == 3) {
-                road.add(Junction(it.coordinates))
+                val rotation: Int = calculateJunction(it.coordinates, it.connectedNodes, paths)
+                road.add(Junction(it.coordinates, rotation))
             }
             if (it.connectedNodes.size == 4) {
                 road.add(Crossroad(it.coordinates))
@@ -37,6 +38,58 @@ object RoadBuilder {
         }
 
         return road
+    }
+
+    private fun calculateJunction(currentElement: Point, connectedNodes: List<Int>, paths: List<PathElement>): Int {
+
+        val connectedPoints: List<Point> = paths.filterIndexed { index, _ -> connectedNodes.contains(index) }.map { pathElement: PathElement -> pathElement.coordinates }
+
+        val hasRightRoad: Boolean = hasRoadOnRight(connectedPoints, currentElement)
+        val hasLeftRoad: Boolean = hasRoadOnLeft(connectedPoints, currentElement)
+        val hasTopRoad: Boolean = hasRoadOnTop(connectedPoints, currentElement)
+        val hasBottomRoad: Boolean = hasRoadOnBottom(connectedPoints, currentElement)
+
+        if (!hasRightRoad) {
+            return 2
+        }
+
+        if (!hasLeftRoad) {
+            return 4
+        }
+
+        if (!hasTopRoad) {
+            return 1
+        }
+
+        if (!hasBottomRoad) {
+            return 3
+        }
+
+        return 1
+    }
+
+    private fun hasRoadOnBottom(connectedPoints: List<Point>, currentElement: Point): Boolean {
+        connectedPoints.forEach { point: Point -> if (point.y < currentElement.y) return true }
+
+        return false
+    }
+
+    private fun hasRoadOnTop(connectedPoints: List<Point>, currentElement: Point): Boolean {
+        connectedPoints.forEach { point: Point -> if (point.y > currentElement.y) return true }
+
+        return false
+    }
+
+    private fun hasRoadOnLeft(connectedPoints: List<Point>, currentElement: Point): Boolean {
+        connectedPoints.forEach { point: Point -> if (point.x > currentElement.x) return true }
+
+        return false
+    }
+
+    fun hasRoadOnRight(connectedPoints: List<Point>, currentElement: Point): Boolean {
+        connectedPoints.forEach { point: Point -> if (point.x < currentElement.x) return true }
+
+        return false
     }
 
     private fun calculateStartFinish(currentElement: Point, connectedNodes: List<Int>, paths: List<PathElement>): Int {
@@ -100,5 +153,5 @@ data class Start(val point: Point, val rotation: Int) : RoadBlock()
 data class Finish(val point: Point, val rotation: Int) : RoadBlock()
 data class Turn(val point: Point, val rotation: Int) : RoadBlock()
 data class Straight(val point: Point, val rotation: Int) : RoadBlock()
-data class Junction(val point: Point) : RoadBlock()
+data class Junction(val point: Point, val rotation: Int) : RoadBlock()
 data class Crossroad(val point: Point) : RoadBlock()
