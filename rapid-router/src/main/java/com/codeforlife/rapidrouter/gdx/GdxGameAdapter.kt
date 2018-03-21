@@ -54,8 +54,8 @@ class GdxGameAdapter : ApplicationAdapter() {
         grassBatch = SpriteBatch()
         grassImg = Texture("tiles/country/grass.png")
 
-        levelMap = LevelReader.loadLevel(18)
-        road = RoadBuilder.build(levelMap.paths, levelMap.startingPoint(), levelMap.endingPoints)
+        levelMap = LevelReader.loadLevel(14)
+        road = RoadBuilder().build(levelMap.paths, levelMap.startingPoint(), levelMap.endingPoints)
 
         endBatch = SpriteBatch()
         endImg = Texture("tiles/road/dead_end.png")

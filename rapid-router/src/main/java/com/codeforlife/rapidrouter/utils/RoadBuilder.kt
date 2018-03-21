@@ -3,7 +3,7 @@ package com.codeforlife.rapidrouter.utils
 import com.codeforlife.rapidrouter.models.PathElement
 import com.codeforlife.rapidrouter.models.Point
 
-object RoadBuilder {
+open class RoadBuilder {
     fun build(paths: List<PathElement>, startingPoint: Point, endingPoints: List<Point>): MutableList<RoadBlock> {
 
         val road = mutableListOf<RoadBlock>()
@@ -92,7 +92,7 @@ object RoadBuilder {
         return false
     }
 
-    private fun calculateStartFinish(currentElement: Point, connectedNodes: List<Int>, paths: List<PathElement>): Int {
+    fun calculateStartFinish(currentElement: Point, connectedNodes: List<Int>, paths: List<PathElement>): Int {
         val nextPath = paths[connectedNodes[0]].coordinates
 
         return when {
@@ -103,7 +103,7 @@ object RoadBuilder {
         }
     }
 
-    private fun calculateStraightRotation(currentElement: Point, connectedNodes: List<Int>, paths: List<PathElement>): Int {
+    fun calculateStraightRotation(currentElement: Point, connectedNodes: List<Int>, paths: List<PathElement>): Int {
         val nextPath = paths[connectedNodes[1]].coordinates
 
         return when {
@@ -112,7 +112,7 @@ object RoadBuilder {
         }
     }
 
-    private fun calculateTurnRotation(currentElement: Point, connectedNodes: List<Int>, paths: List<PathElement>): Int {
+    fun calculateTurnRotation(currentElement: Point, connectedNodes: List<Int>, paths: List<PathElement>): Int {
         val previousPath = paths[connectedNodes[0]].coordinates
         val nextPath = paths[connectedNodes[1]].coordinates
 
@@ -139,7 +139,7 @@ object RoadBuilder {
         }
     }
 
-    private fun isTurn(connectedNodes: List<Int>, paths: List<PathElement>): Boolean {
+    fun isTurn(connectedNodes: List<Int>, paths: List<PathElement>): Boolean {
         val previousPath = paths[connectedNodes[0]].coordinates
         val nextPath = paths[connectedNodes[1]].coordinates
 
