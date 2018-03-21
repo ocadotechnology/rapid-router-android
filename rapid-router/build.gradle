@@ -63,6 +63,10 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.6.1'
 
     testImplementation 'junit:junit:4.12'
+    testImplementation 'org.jetbrains.spek:spek-api:1.1.5'
+    testImplementation 'org.jetbrains.spek:spek-junit-platform-engine:1.1.5'
+
+
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
